@@ -22,4 +22,12 @@ public class AppTest extends FluentTest {
     goTo("http://localhost:4567/");
     assertThat(pageSource()).contains("Dictionary!");
   }
+
+  @Test
+  public void DefinitionIsCreatedTest() {
+    goTo("http://localhost:4567/");
+    fill("#firstDefinition").with("Delightful");
+    submit(".btn");
+    assertThat(pageSource()).contains("Your definition has been saved.");
+  }
 }

@@ -15,5 +15,17 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    post("/definitions", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+
+      String firstDefinition = request.queryParams("firstDefinition");
+      Definition newDefinition = new Definition(firstDefinition);
+      request.session().attribute("definition", newDefinition);
+
+      model.put("template", "templates/success.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+
   }
 }

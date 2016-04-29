@@ -1,4 +1,10 @@
 <h1>Dictionary!</h1>
+#if ($definition)
+  <p>Current definition:</p>
+  <p>$definition.getFirstDefinition()</p>
+#else
+  <p>No definitions</p>
+#end
 
 <p>Add a new Definition:</p>
 

@@ -25,10 +25,18 @@ public class DefinitionTest {
 
   @Test
   public void clear_emptiesAllDefinitionsFromArrayList_0() {
-    Definition myDefinition = new Definition("Mow the lawn");
+    Definition myDefinition = new Definition("Delightful");
     Definition.clear();
     assertEquals(Definition.all().size(), 0);
-}
+  }
+
+  @Test
+  public void getId_definitionsInstantiateWithAnID_1() {
+    Definition.clear();
+    Definition myDefinition = new Definition("Delightful");
+    assertEquals(1, myDefinition.getId());
+  }
+
 
 
 }

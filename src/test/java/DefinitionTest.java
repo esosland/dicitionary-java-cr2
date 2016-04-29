@@ -1,16 +1,21 @@
+
 import org.junit.*;
 import static org.junit.Assert.*;
 
 public class DefinitionTest {
+  @After
+  public void tearDown() {
+    Definition.clear();
+  }
 
   @Test
-  public void Definition_instantiatesCorrectly_true() {
+  public void definition_instantiatesCorrectly_true() {
     Definition myDefinition = new Definition("Delightful");
     assertEquals(true, myDefinition instanceof Definition);
   }
 
   @Test
-  public void Definition_instantiatesWithFirstDefinition_String() {
+  public void definition_instantiatesWithFirstDefinition_String() {
     Definition myDefinition = new Definition("Delightful");
     assertEquals("Delightful", myDefinition.getFirstDefinition());
   }
@@ -18,7 +23,7 @@ public class DefinitionTest {
   @Test
   public void all_returnsAllInstancesOfDefinition_true() {
     Definition firstDefinition = new Definition("Delightful");
-    Definition secondDefinition = new Definition("Wonderful");
+    Definition secondDefinition= new Definition("Wonderful");
     assertTrue(Definition.all().contains(firstDefinition));
     assertTrue(Definition.all().contains(secondDefinition));
   }
@@ -32,7 +37,6 @@ public class DefinitionTest {
 
   @Test
   public void getId_definitionsInstantiateWithAnID_1() {
-    Definition.clear();
     Definition myDefinition = new Definition("Delightful");
     assertEquals(1, myDefinition.getId());
   }
@@ -48,7 +52,4 @@ public class DefinitionTest {
   public void find_returnsNullWhenNoDefinitionFound_null() {
     assertTrue(Definition.find(999) == null);
   }
-
-
-
 }

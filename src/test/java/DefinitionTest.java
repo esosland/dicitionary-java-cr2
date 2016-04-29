@@ -9,4 +9,11 @@ public class DefinitionTest {
     assertEquals(true, myDefinition instanceof Definition);
   }
 
+  @Test
+  public void Definition_instantiatesWithFirstDefinition_String() {
+    Definition myDefinition = new Definition("Delightful");
+    assertEquals("Delightful", myDefinition.getFirstDefinition());
+  }
+
+
 }

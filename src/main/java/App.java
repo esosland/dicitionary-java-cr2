@@ -12,28 +12,68 @@ public class App {
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      model.put("definitions", request.session().attribute("definitions"));
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/definitions", (request, response) -> {
-      Map<String, Object> model = new HashMap<String, Object>();
+    get("definitions/new", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("template", "templates/definition-form.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
-      ArrayList<Definition> definitions = request.session().attribute("definitions");
-      if (definitions == null) {
-        definitions = new ArrayList<Definition>();
-        request.session().attribute("definitions", definitions);
-      }
+    get("/definitions", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      model.put("definitions", Definition.all());
+      model.put("template", "templates/definitions.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
+    post("/definitions", (request,response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
       String firstDefinition = request.queryParams("firstDefinition");
       Definition newDefinition = new Definition(firstDefinition);
-      definitions.add(newDefinition);
-
       model.put("template", "templates/success.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
+    get("/definitions/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Definition definition = Definition.find(Integer.parseInt(request.params(":id")));
+      model.put("definition", definition);
+      model.put("template", "templates/definition.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    get("/definitions/:id", (request, response) -> {
+      HashMap<String, Object> model = new HashMap<String, Object>();
+      Definition definition = Definition.find(Integer.parseInt(request.params(":id")));
+      model.put("definition", definition);
+      model.put("template", "templates/definition.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
 
   }
 }
+
+
+//     post("/definitions", (request, response) -> {
+//       Map<String, Object> model = new HashMap<String, Object>();
+//
+//       ArrayList<Definition> definitions = request.session().attribute("definitions");
+//       if (definitions == null) {
+//         definitions = new ArrayList<Definition>();
+//         request.session().attribute("definitions", definitions);
+//       }
+//
+//       String firstDefinition = request.queryParams("firstDefinition");
+//       Definition newDefinition = new Definition(firstDefinition);
+//       definitions.add(newDefinition);
+//
+//       model.put("template", "templates/success.vtl");
+//       return new ModelAndView(model, layout);
+//     }, new VelocityTemplateEngine());
+//
+//
+//   }
+// }

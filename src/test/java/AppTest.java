@@ -3,9 +3,8 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import static org.fluentlenium.core.filter.FilterConstructor.*;
-
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.fluentlenium.core.filter.FilterConstructor.*;
 
 public class AppTest extends FluentTest {
   public WebDriver webDriver = new HtmlUnitDriver();
@@ -27,30 +26,48 @@ public class AppTest extends FluentTest {
   @Test
   public void DefinitionIsCreatedTest() {
     goTo("http://localhost:4567/");
+    click("a", withText("Add a new definition"));
     fill("#firstDefinition").with("Delightful");
     submit(".btn");
     assertThat(pageSource()).contains("Your definition has been saved.");
   }
 
   @Test
-  public void DefinitionIsDisplayedTest() {
-    goTo("http://localhost:4567/");
+  public void definitionIsDisplayedTest() {
+    goTo("http://localhost:4567/definitions/new");
     fill("#firstDefinition").with("Delightful");
     submit(".btn");
-    click("a", withText("Go Back"));
+    click("a", withText("View definitions"));
     assertThat(pageSource()).contains("Delightful");
   }
 
   @Test
   public void multipleDefinitionsAreDisplayedTest() {
-    goTo("http://localhost:4567/");
+    goTo("http://localhost:4567/definitions/new");
     fill("#firstDefinition").with("Delightful");
     submit(".btn");
-    click("a", withText("Go Back"));
+    goTo("http://localhost:4567/definitions/new");
     fill("#firstDefinition").with("Wonderful");
     submit(".btn");
-    click("a", withText("Go Back"));
+    click("a", withText("View definitions"));
     assertThat(pageSource()).contains("Delightful");
     assertThat(pageSource()).contains("Wonderful");
   }
+
+  @Test
+  public void definitionShowPageDisplaysFirstDefinition() {
+    goTo("http://localhost:4567/definitions/new");
+    fill("#firstDefinition").with("Splendid");
+    submit(".btn");
+    click("a", withText("View definitions"));
+    click("a", withText("Splendid"));
+    assertThat(pageSource()).contains("Splendid");
+  }
+
+  @Test
+  public void definitionNotFoundMessageShown() {
+    goTo("http://localhost:4567/definitions/999");
+    assertThat(pageSource()).contains("Definition not found");
+  }
+
 }

@@ -40,4 +40,17 @@ public class AppTest extends FluentTest {
     click("a", withText("Go Back"));
     assertThat(pageSource()).contains("Delightful");
   }
+
+  @Test
+  public void multipleDefinitionsAreDisplayedTest() {
+    goTo("http://localhost:4567/");
+    fill("#firstDefinition").with("Delightful");
+    submit(".btn");
+    click("a", withText("Go Back"));
+    fill("#firstDefinition").with("Wonderful");
+    submit(".btn");
+    click("a", withText("Go Back"));
+    assertThat(pageSource()).contains("Delightful");
+    assertThat(pageSource()).contains("Wonderful");
+  }
 }

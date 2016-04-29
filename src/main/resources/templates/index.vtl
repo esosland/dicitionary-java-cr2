@@ -1,7 +1,10 @@
 <h1>Dictionary!</h1>
-#if ($definition)
-  <p>Current definition:</p>
-  <p>$definition.getFirstDefinition()</p>
+#if ($definitions)
+  <ul>
+    #foreach ($definition in $definitions)
+      <li>$definition.getFirstDefinition()</li>
+    #end
+  </ul>
 #else
   <p>No definitions</p>
 #end

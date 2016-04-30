@@ -64,6 +64,21 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Add a definition to Irresolute");
   }
 
+  @Test
+  public void definitionsIsAddedAndDisplayed() {
+    goTo("http://localhost:4567/words/new");
+    fill("#name").with("Uncertain");
+    submit(".btn");
+    click("a", withText("View words"));
+    click("a", withText("Uncertain"));
+    click("a", withText("Add a new definition"));
+    fill("#firstDefinition").with("Ambiguous");
+    submit(".btn");
+    click("a", withText("View words"));
+    click("a", withText("Uncertain"));
+    assertThat(pageSource()).contains("Ambiguous");
+  }
+
 
 }
 

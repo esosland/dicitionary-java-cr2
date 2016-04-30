@@ -2,7 +2,11 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class WordTest{
-
+  @After
+  public void tearDown() {
+    Word.clear();
+    Definition.clear();
+  }
 
 @Test
   public void word_instantiatesCorrectly_true() {
@@ -31,12 +35,20 @@ public class WordTest{
     assertEquals(Word.all().size(), 0);
   }
 
+  @Test
+  public void getId_wordsInstantiateWithAnId_1() {
+    Word testWord = new Word("Frabjous");
+    assertEquals(1, testWord.getId());
+  }
+
   // @Test
-  // public void getId_wordsInstantiateWithAnId_1() {
-  //   Word testWord = new Word("Frabjous");
-  //   assertEquals(1, testWord.getId());
+  // public void find_returnsWordWithSameId_secondWord() {
+  //   Word firstWord = new Word("Frabjous");
+  //   Word secondWord = new Word("Irresolute");
+  //   assertEquals(Word.find(secondWord.getId()), secondWord);
   // }
-  //
+
+
 
 
 }

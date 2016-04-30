@@ -59,6 +59,15 @@ public class WordTest{
     assertEquals(0, testWord.getDefinitions().size());
   }
 
+  @Test
+  public void addDefinition_addsDefinitionToList_true() {
+    Word testWord = new Word("Frabjous");
+    Definition testDefinition = new Definition("Delightful");
+    testWord.addDefinition(testDefinition);
+    assertTrue(testWord.getDefinitions().contains(testDefinition));
+  }
+
+
 
 
 

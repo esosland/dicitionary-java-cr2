@@ -43,6 +43,28 @@ public class AppTest extends FluentTest {
     assertThat(pageSource()).contains("Frabjous");
   }
 
+  @Test
+  public void wordShowPageDisplaysName() {
+    goTo("http://localhost:4567/words/new");
+    fill("#name").with("Doughty");
+    submit(".btn");
+    click("a", withText("View words"));
+    click("a", withText("Doughty"));
+    assertThat(pageSource()).contains("Doughty");
+  }
+
+  @Test
+  public void wordDefinitionsFormIsDisplayed() {
+    goTo("http://localhost:4567/words/new");
+    fill("#name").with("Irresolute");
+    submit(".btn");
+    click("a", withText("View words"));
+    click("a", withText("Irresolute"));
+    click("a", withText("Add a new definition"));
+    assertThat(pageSource()).contains("Add a definition to Irresolute");
+  }
+
+
 }
 
 

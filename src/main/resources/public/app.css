@@ -1,0 +1,11 @@
+body {
+  background-color: #FF33FF;
+}
+
+.title {
+  background-color: #CCFF00;
+  text-align: center;
+  color: #6633FF;
+  font-size: 70px;
+  width: 100%;
+}

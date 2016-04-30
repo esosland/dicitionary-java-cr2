@@ -53,6 +53,13 @@ public class WordTest{
     assertTrue(Word.find(999) == null);
   }
 
+  @Test
+  public void getDefinitions_initiallyReturnsEmptyList_ArrayList() {
+    Word testWord = new Word("Frabjous");
+    assertEquals(0, testWord.getDefinitions().size());
+  }
+
+
 
 
 

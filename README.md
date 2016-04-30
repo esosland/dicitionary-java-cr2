@@ -1,4 +1,4 @@
-#_Replace Vowels Java App_#
+#_Dictionary Java App_#
 ##**Java Week 2 Code Review Epicodus 2016**##
 ###By Elissa Sosland###
 
